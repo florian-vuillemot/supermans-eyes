@@ -17,8 +17,6 @@ php.packages:
             - php72-php-mysqlnd
             - php72-php-cli
             - php72-php-pecl-apcu
-            - redis
-            - php72-php-pecl-redis
             - php72-php-common
             - php72-php-ldap
             - httpd
