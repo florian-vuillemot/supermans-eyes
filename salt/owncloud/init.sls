@@ -20,3 +20,8 @@ Create symlink between sites-available and sites enabled:
         - target: /etc/httpd/sites-available/owncloud.conf
         - makedirs: True
 
+
+Restart apache:
+    service.running:
+        - name: httpd
+        - reload: True
