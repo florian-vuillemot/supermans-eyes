@@ -14,6 +14,12 @@ Add web server config file:
         - source: salt://owncloud/config_file/owncloud.conf
         - makedirs: True
 
+
+Add config in http conf.d file:
+    file.managed:
+        - name: /etc/httpd/conf.d/owncloud.conf
+        - source: salt://owncloud/config_file/owncloud.conf
+
 Create symlink between sites-available and sites enabled:
     file.symlink:
         - name: /etc/httpd/sites-enabled/owncloud.conf
@@ -33,6 +39,10 @@ SeLinux Update:
 Enable MariaDB:
     cmd.run:
         - name: "setsebool -P httpd_can_network_connect_db 1"
+
+Init OwnCloud:
+    cmd.run:
+        - name: "php72 /var/www/owncloud/occ maintenance:install --database 'mysql' --database-name 'owncloud' --database-user 'root' --database-pass '' --admin-user 'admin' --admin-pass 'password'"
 
 Restart apache:
     service.running:
