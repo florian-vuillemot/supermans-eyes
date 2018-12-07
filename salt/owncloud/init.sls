@@ -20,6 +20,19 @@ Create symlink between sites-available and sites enabled:
         - target: /etc/httpd/sites-available/owncloud.conf
         - makedirs: True
 
+{% for usr in ['data', 'config', 'apps', '.htaccess', '.user.ini'] %}
+Enable '{{ usr }}' for SeLinux:
+    cmd.run:
+        - name: "semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/html/owncloud/{{ usr }}(/.*)?'"
+{% endfor %}
+
+SeLinux Update:
+    cmd.run:
+        - name: "restorecon -Rv '/var/www/owncloud/'"
+
+Enable MariaDB:
+    cmd.run:
+        - name: "setsebool -P httpd_can_network_connect_db 1"
 
 Restart apache:
     service.running:
