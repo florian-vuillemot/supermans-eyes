@@ -8,6 +8,14 @@ Extract OwnCloud in web server directory:
         - name: /var/www
         - source: /etc/owncloud/owncloud.tar.bz2
 
+/var/www/owncloud:
+    file.directory:
+        - user: apache
+        - group: apache
+        - recurse:
+            - user
+            - group
+
 Add web server config file:
     file.managed:
         - name: /etc/httpd/sites-available/owncloud.conf
@@ -42,7 +50,7 @@ Enable MariaDB:
 
 Init OwnCloud:
     cmd.run:
-        - name: "php72 /var/www/owncloud/occ maintenance:install --database 'mysql' --database-name 'owncloud' --database-user 'root' --database-pass '' --admin-user 'admin' --admin-pass 'password'"
+        - name: "sudo -u apache php72 /var/www/owncloud/occ maintenance:install --database 'mysql' --database-name 'owncloud' --database-user 'root' --database-pass '' --admin-user 'admin' --admin-pass 'password'"
 
 Restart apache:
     service.running:
