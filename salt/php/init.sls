@@ -19,6 +19,9 @@ php.packages:
             - php72-php-pecl-apcu
             - php72-php-common
             - php72-php-ldap
+            - php72-php-intl
+            - php72-php-process
+            - php72-php-xml
 
 # Todo: do this only if php72 is not already enable
 Enable php72 in bash:
