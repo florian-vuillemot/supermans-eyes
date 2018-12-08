@@ -37,7 +37,7 @@ Create symlink between sites-available and sites enabled:
 {% for usr in ['data', 'config', 'apps', '.htaccess', '.user.ini'] %}
 Enable '{{ usr }}' for SeLinux:
     cmd.run:
-        - name: "semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/html/owncloud/{{ usr }}(/.*)?'"
+        - name: "semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/owncloud/{{ usr }}(/.*)?'"
 {% endfor %}
 
 SeLinux Update:
@@ -50,7 +50,7 @@ Enable MariaDB:
 
 Init OwnCloud:
     cmd.run:
-        - name: "sudo -u apache php72 /var/www/owncloud/occ maintenance:install --database 'mysql' --database-name 'owncloud' --database-user 'root' --database-pass '' --admin-user 'admin' --admin-pass 'password'"
+        - name: "sudo -u apache php72 /var/www/owncloud/occ maintenance:install --database 'mysql' --database-name 'owncloud' --database-user 'root' --database-pass 'password' --admin-user 'admin' --admin-pass 'password'"
 
 Restart apache:
     service.running:
