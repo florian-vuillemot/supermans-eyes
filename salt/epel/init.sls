@@ -3,4 +3,7 @@
 epel-release:
     pkg.installed
 
+policycoreutils-python:
+    pkg.installed
+
 {% endif %}
