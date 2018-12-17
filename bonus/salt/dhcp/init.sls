@@ -30,4 +30,3 @@ Allow dhcp in firewall:
 Reload firewall:
     cmd.run:
         - name: "firewall-cmd --reload"
-    
